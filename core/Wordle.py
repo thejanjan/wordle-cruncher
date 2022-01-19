@@ -1,0 +1,3 @@
+"""
+The Wordle simulator class.
+"""
