@@ -17,6 +17,8 @@ class Wordle:
 
     max_guesses = 6
 
+    reveals_word = False
+
     def __init__(self, word: str = None) -> None:
         """
         Initiates a Wordle game.
@@ -117,6 +119,7 @@ class Wordle:
             correct_characters=self.__correct_characters,
             guessed_words=self.__guessed_words,
             guesses=self.__guesses,
+            final_word=self.get_word(),
         )
 
     """
@@ -158,11 +161,11 @@ class Wordle:
         :param char: The character to mark.
         :param position: The position where the character is misplaced.
         """
-        if char not in self.__correct_characters:
-            self.__correct_characters[char] = [position]
+        if char not in self.__misplaced_characters:
+            self.__misplaced_characters[char] = [position]
         else:
-            if position not in self.__correct_characters[char]:
-                self.__correct_characters[char].append(position)
+            if position not in self.__misplaced_characters[char]:
+                self.__misplaced_characters[char].append(position)
 
     def __add_correct_character(self, char: str, position: int) -> None:
         """
@@ -170,11 +173,11 @@ class Wordle:
         :param char: The character to mark.
         :param position: The position where the character is misplaced.
         """
-        if char not in self.__misplaced_characters:
-            self.__misplaced_characters[char] = [position]
+        if char not in self.__correct_characters:
+            self.__correct_characters[char] = [position]
         else:
-            if position not in self.__misplaced_characters[char]:
-                self.__misplaced_characters[char].append(position)
+            if position not in self.__correct_characters[char]:
+                self.__correct_characters[char].append(position)
 
     """
     Class Methods
@@ -211,7 +214,7 @@ class Wordle:
 
     def get_word(self) -> str:
         # No cheating!
-        if self.get_state() not in (WordleState.Win, WordleState.Lose):
+        if self.get_state() not in (WordleState.Win, WordleState.Lose) and not self.reveals_word:
             return ""
         return self.__word
 

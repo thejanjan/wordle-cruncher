@@ -12,7 +12,7 @@ with open('../' + answer_filepath) as answer_file:
     answer_list = [line.strip('\n') for line in answer_file]
 
 with open('../' + guess_filepath) as guess_file:
-    guess_list = [line.strip('\n') for line in guess_file]
+    guess_list = [line.strip('\n') for line in guess_file] + answer_list
 
 
 class WordleState(Enum):
@@ -50,4 +50,4 @@ class WordleResponse:
     correct_characters: Dict[str, List[int]]
     guessed_words: List[str]
     guesses: int
-
+    final_word: str
