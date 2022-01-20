@@ -11,6 +11,9 @@ class Wordle:
     A mock interface of a Wordle game.
     """
 
+    __slots__ = '_word', '_word_length', '_state', '_guesses', '_guessed_words', \
+                '_wrong_characters', '_misplaced_characters', '_correct_characters'
+
     char_check = 'C'
     char_quest = '?'
     char_wrong = 'x'
