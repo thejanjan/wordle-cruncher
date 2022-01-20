@@ -205,6 +205,10 @@ class WARandomAnswer(WordleAnalyzer):
             for word in check_list[:]:
                 acceptableWord = True
 
+                for letter in response.misplaced_characters:
+                    if letter not in word:
+                        continue
+
                 for i, letter in enumerate(word):
                     # if it's a wrong character, then no thank you.
                     if letter in response.wrong_characters:
